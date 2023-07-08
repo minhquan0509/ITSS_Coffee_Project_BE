@@ -6,6 +6,7 @@ const {
   QueryTypes,
   Op,
   Review,
+  Bookmark,
 } = require("../models/index");
 
 const { isEmptyObject } = require("../utils/checkEmptyObject");
@@ -18,7 +19,7 @@ exports.getAllCoffees = async (req, res) => {
         where: {
           is_approved: true,
         },
-        include: { model: CoffeeImage },
+        include: [{ model: CoffeeImage }],
       });
       // console.log(coffees);
       return res.status(200).json({

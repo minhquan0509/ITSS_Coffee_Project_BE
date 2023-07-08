@@ -27,7 +27,7 @@ db.Op = Op;
 
 db.User = require("./userModel")(sequelize, DataTypes, Model);
 db.Coffee = require("./coffeeModel")(sequelize, DataTypes, Model);
-db.BookMark = require("./bookmarkModel")(sequelize, DataTypes, Model);
+db.Bookmark = require("./bookmarkModel")(sequelize, DataTypes, Model);
 db.Review = require("./reviewModel")(sequelize, DataTypes, Model);
 db.CoffeeImage = require("./coffeeImageModel")(sequelize, DataTypes, Model);
 
@@ -69,20 +69,24 @@ db.Coffee.hasMany(db.CoffeeImage, {
   foreignKey: "coffee_id",
 });
 
-db.BookMark.belongsTo(db.User, {
+db.Bookmark.belongsTo(db.User, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
 
-db.BookMark.belongsTo(db.Coffee, {
+db.Bookmark.belongsTo(db.Coffee, {
   foreignKey: "coffee_id",
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
 
-db.User.hasMany(db.BookMark, {
+db.User.hasMany(db.Bookmark, {
   foreignKey: "user_id",
+});
+
+db.Coffee.hasMany(db.Bookmark, {
+  foreignKey: "coffee_id",
 });
 
 db.sequelize.sync();

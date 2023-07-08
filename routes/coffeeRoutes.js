@@ -3,6 +3,8 @@ const authController = require("../controllers/authController");
 const coffeeController = require("../controllers/coffeeController");
 const uploadCoffeeImageController = require("../controllers/uploadCoffeeImageController");
 const reviewController = require("../controllers/reviewController");
+const bookmarkController = require("../controllers/bookmarkController");
+
 const router = express.Router();
 
 router.get("/", coffeeController.getAllCoffees);
@@ -21,5 +23,17 @@ router.post(
 );
 
 router.get("/:id/reviews", coffeeController.getCoffee);
+
+router.post(
+  "/:id/bookmarks",
+  authController.protect,
+  bookmarkController.createBookmark
+);
+
+router.delete(
+  "/:id/bookmarks",
+  authController.protect,
+  bookmarkController.deleteBookmark
+);
 
 module.exports = router;

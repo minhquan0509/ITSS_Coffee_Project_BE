@@ -50,24 +50,3 @@ exports.createReview = async (req, res) => {
     });
   }
 };
-
-exports.getAllCoffeeReviews = async (req, res) => {
-  try {
-    const coffee = await Coffee.findOne({ where: { id: req.params.id } });
-    if (!coffee) {
-      return res.status(404).json({
-        status: "fail",
-        message: "This coffee does not exist with that ID !",
-      });
-    }
-
-    return res.status(200).json({
-      status: "success",
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "fail",
-      message: error,
-    });
-  }
-};
