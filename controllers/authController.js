@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { promisify } = require("util");
-const { User } = require("../models/index");
+const { User, Bookmark, Coffee, CoffeeImage } = require("../models/index");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -54,6 +54,9 @@ exports.login = async (req, res) => {
     }
     const user = await User.findOne({
       where: { gmail },
+      include: [
+        { model: Bookmark, include: [{ model: Coffee, include: CoffeeImage }] },
+      ],
     });
     // console.log(user.username, user.password);
     const correct = await bcrypt.compare(password, user.password);
