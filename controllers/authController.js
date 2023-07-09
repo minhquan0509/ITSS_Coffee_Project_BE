@@ -54,9 +54,6 @@ exports.login = async (req, res) => {
     }
     const user = await User.findOne({
       where: { gmail },
-      include: [
-        { model: Bookmark, include: [{ model: Coffee, include: CoffeeImage }] },
-      ],
     });
     // console.log(user.username, user.password);
     const correct = await bcrypt.compare(password, user.password);
