@@ -89,6 +89,6 @@ db.Coffee.hasMany(db.Bookmark, {
   foreignKey: "coffee_id",
 });
 
-// db.sequelize.sync();
+db.sequelize.sync();
 
 module.exports = db;

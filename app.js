@@ -10,7 +10,11 @@ dotenv.config({
   path: "./config.env",
 });
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://kissaten-fe.vercel.app/',
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
