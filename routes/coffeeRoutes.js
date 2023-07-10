@@ -16,6 +16,13 @@ router.post(
   coffeeController.createCoffee
 );
 
+router.delete(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("user", "admin"),
+  coffeeController.deleteCoffee
+);
+
 router.post(
   "/:id/reviews",
   authController.protect,
