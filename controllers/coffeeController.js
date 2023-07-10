@@ -124,15 +124,37 @@ exports.getCoffee = async (req, res) => {
   }
 };
 
-// exports.updateCoffee = async (req, res) => {
-//   try {
-//   } catch (error) {
-//     return res.status(400).json({
-//       status: "fail",
-//       error: error.errors[0].message,
-//     });
-//   }
-// };
+exports.updateCoffee = async (req, res) => {
+  try {
+    const coffee = await Coffee.findOne({ where: { id: req.params.id } });
+    if (!coffee) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No room found with that ID",
+      });
+    }
+
+    if (coffee.posted_user == req.user.id || req.user.role == "admin") {
+      await coffee.update({ ...req.body });
+      return res.status(200).json({
+        status: "success",
+        data: {
+          coffee,
+        },
+      });
+    }
+
+    return res.status(400).json({
+      status: "fail",
+      message: "Can not update coffee because the user is not owner or admin",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "fail",
+      error: error.errors[0].message,
+    });
+  }
+};
 
 exports.deleteCoffee = async (req, res) => {
   try {
@@ -144,7 +166,7 @@ exports.deleteCoffee = async (req, res) => {
       });
     }
 
-    console.log(req.user);
+    // console.log(req.user);
 
     if (coffee.posted_user == req.user.id || req.user.role == "admin") {
       await coffee.destroy();
@@ -156,12 +178,12 @@ exports.deleteCoffee = async (req, res) => {
 
     return res.status(400).json({
       status: "fail",
-      message: "Can not delete because the user is not owner or admin",
+      message: "Can not delete coffee because the user is not owner or admin",
     });
   } catch (error) {
     return res.status(400).json({
       status: "fail",
-      error,
+      error: error.errors[0].message,
     });
   }
 };

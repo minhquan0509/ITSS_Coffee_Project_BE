@@ -23,6 +23,13 @@ router.delete(
   coffeeController.deleteCoffee
 );
 
+router.patch(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("user", "admin"),
+  coffeeController.updateCoffee
+);
+
 router.post(
   "/:id/reviews",
   authController.protect,
