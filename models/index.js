@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes, Model, QueryTypes, Op } = require("sequelize");
-const sequelize = new Sequelize("coffee_db", "root", "Taodeobiet1!", {
+const sequelize = new Sequelize("coffee_db", "root", "root", {
   host: "localhost",
   dialect: "mysql",
   port: 3306,
@@ -89,6 +89,6 @@ db.Coffee.hasMany(db.Bookmark, {
   foreignKey: "coffee_id",
 });
 
-db.sequelize.sync();
+// db.sequelize.sync();
 
 module.exports = db;
