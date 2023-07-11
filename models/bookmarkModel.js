@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes, Model) => {
       sequelize, // We need to pass the connection instance
       modelName: "Bookmark", // We need to choose the model name
       timestamps: true,
+      freezeTableName: true,
     }
   );
   return Bookmark;
