@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes, Model) => {
     {
       // Other model options go here
       sequelize, // We need to pass the connection instance
-      modelName: "Coffee", // We need to choose the model name
+      modelName: "coffees", // We need to choose the model name
       timestamps: false,
       freezeTableName: true,
     }
