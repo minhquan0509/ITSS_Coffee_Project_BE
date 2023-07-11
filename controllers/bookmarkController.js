@@ -90,7 +90,7 @@ exports.getAllBookmarksOfUser = async (req, res) => {
 
     return res.status(200).json({
       status: "success",
-      results: user.Bookmarks.length,
+      // results: user.Bookmarks.length,
       data: {
         user,
       },
