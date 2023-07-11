@@ -11,7 +11,7 @@ dotenv.config({
 });
 
 const corsOptions = {
-  origin: 'https://kissaten-fe.vercel.app/',
+  origin: 'https://kissaten-fe.vercel.app',
 };
 
 app.use(cors(corsOptions));
