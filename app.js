@@ -31,6 +31,6 @@ app.all("*", (req, res, next) => {
   });
 });
 
-app.listen(process.env.NODE_APP_PORT_NUMBER, () =>
+app.listen(process.env.NODE_APP_PORT_NUMBER || 3001, () =>
   console.log("server is running in port 3001")
 );
